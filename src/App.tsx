@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Desktop from "./components/layout/Desktop";
 import Mobile from "./components/layout/Mobile";
+import { getRandomSquare } from "./logic/getRandomSquare";
 
 function App() {
   const [board, setBoard] = useState(null);
@@ -49,7 +50,7 @@ function App() {
 
   useEffect(() => {
     if (countDownStart && parseInt(preCountDown, 10) === 0) {
-      setId(getRandomSquare().id);
+      setId(getRandomSquare());
     }
   }, [countDownStart, preCountDown]);
 
@@ -79,15 +80,6 @@ function App() {
     }
   }, [countDown, countDownStart]);
 
-  /*random square*/
-  const getRandomSquare = () => {
-    const randomIndex = Math.floor(Math.random() * 64);
-    const row = Math.floor(randomIndex / 8);
-    const col = randomIndex % 8;
-    const id = `${String.fromCharCode(97 + col)}${8 - row}`;
-    return { row, col, id };
-  };
-
   /*start timer function*/
   const handleStart = () => {
     setShowModal(false);
@@ -109,11 +101,11 @@ function App() {
         setHistory([...history, id]);
         setScore(score + 1);
         saveHighScore(score + 1, history.length + 1);
-        setId(getRandomSquare().id);
+        setId(getRandomSquare());
       } else {
         setChoiceHx([...choiceHx, choice]);
         setHistory([...history, id]);
-        setId(getRandomSquare().id);
+        setId(getRandomSquare());
       }
     }
   };
