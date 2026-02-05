@@ -4,9 +4,11 @@ export interface Square {
   id: string;
 }
 
-export const squareInfo = (rowIndex: number, colIndex: number): Square => {
-  const file = String.fromCharCode(97 + colIndex);
-  const rank = 8 - rowIndex;
+export type Perspective = "light" | "dark"
+
+export const squareInfo = (rowIndex: number, colIndex: number, perspective: Perspective = "light"): Square => {
+  const file = String.fromCharCode(97 + (perspective === "light" ? colIndex : 7 - colIndex));
+  const rank = perspective === "light" ? 8 - rowIndex : rowIndex + 1;
   return {
     "file": file,
     "rank": rank,
@@ -14,5 +16,5 @@ export const squareInfo = (rowIndex: number, colIndex: number): Square => {
   };
 };
 
-export const squareColor = (rowIndex: number, colIndex: number): "light" | "dark" => 
+export const squareColor = (rowIndex: number, colIndex: number): "light" | "dark" =>  
   (rowIndex + colIndex) % 2 === 0 ? "light" : "dark"; 

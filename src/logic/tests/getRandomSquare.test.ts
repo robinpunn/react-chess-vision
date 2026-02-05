@@ -1,5 +1,5 @@
 import {describe, it, expect} from 'vitest';
-import { getRandomSquare } from './getRandomSquare';
+import { getRandomSquare } from '../getRandomSquare';
 
 describe('getRandomSquare', () => {
   it('should return a valid chess square id', () => {

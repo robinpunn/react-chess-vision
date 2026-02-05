@@ -5,6 +5,10 @@
 - `rowIndex`: 0 (top) → 7 (bottom)
 - `colIndex`: 0 (left) → 7 (right)
 
+## Perspective
+- "light" or "dark"
+- determines player orientation to the board
+
 ## Square Identity
 
 `squareInfo(rowIndex, colIndex, perspective)` takes perspective into consideration to return the correct square id\n
@@ -18,7 +22,7 @@ returns:
 
 `squareColor(rowIndex, colIndex)` returns:
 
-- `"light"` or `"dark"`
+- "light" or "dark"
 
 
 ## Random Square Selection
