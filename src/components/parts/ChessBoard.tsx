@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import PreCount from "./PreCount";
 import RandomSquare from "./RandomSquare";
 import "./ChessBoard.css";
+import { squareInfo, squareColor } from "../../logic/board";
 
 interface ChessBoardProps {
   setBoard: (board: any) => void;
@@ -25,10 +26,11 @@ const ChessBoard: React.FC<ChessBoardProps> = ({ setBoard, preCountDown, id, han
         {[...Array(8)].map((_, i) => (
           <tr key={i}>
             {[...Array(8)].map((_, j) => {
-              const id = `${String.fromCharCode(97 + j)}${8 - i}`;
-              const className = (i + j) % 2 === 0 ? "white" : "green";
-              const letter = String.fromCharCode(97 + j);
-              const number = 8 - i;
+              const square = squareInfo(i,j);
+              const id = square.id;
+              const className = squareColor(i,j);
+              const letter = square.file;
+              const number = square.rank;
               const isLetterCell = i === 7 && j !== 0;
               const isNumberCell = j === 0 && i !== 7;
               return isLetterCell ? (

@@ -4,10 +4,9 @@
   box-shadow: 0 0 5px rgba(127, 124, 124, 0.5),
   0 0 25px rgba(127, 124, 124, 0.5),
   0 0 50px rgba(127, 124, 124, 0.5),
-  0 0 100px rgba(127, 124, 124, 0.5);
 }
 
-.white {
+.light {
   background-color: rgb(187, 187, 187);
   width: 40px;
   height: 40px;
@@ -15,14 +14,14 @@
   position: relative;
 }
 
-.white:hover {
+.light:hover {
   box-shadow: 0 0 5px rgba(187, 187, 187, 0.5),
   0 0 25px rgba(187, 187, 187, 0.5),
   0 0 50px rgba(187, 187, 187, 0.5),
   0 0 100px rgba(187, 187, 187, 0.5);
 }
 
-.green {
+.dark {
   background-color: rgb(0,0,0);
   width: 40px;
   height: 40px;
@@ -30,7 +29,7 @@
   position: relative;
 }
 
-.green:hover {
+.dark:hover {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5),
   0 0 25px rgba(0, 0, 0, 0.5),
   0 0 50px rgba(187, 187, 187, 0.5),
@@ -80,13 +79,13 @@
 }
 
 @media screen and (min-width: 40rem) {
-  .white {
+  .light {
     width: 50px;
     height: 50px;
     font-size: 0.75rem;
   }
 
-  .green {
+  .dark {
     width: 50px;
     height: 50px;
     font-size: 0.75rem;
@@ -94,13 +93,13 @@
 }
 
 @media screen and (min-width: 60rem) {
-  .white {
+  .light {
     width: 60px;
     height: 60px;
     font-size: 0.9rem;
   }
 
-  .green {
+  .dark {
     width: 60px;
     height: 60px;
     font-size: 0.9rem;
@@ -112,13 +111,13 @@
     margin: 1rem 10rem 1rem 0;
   }
 
-  .white {
+  .light {
     width: 80px;
     height: 80px;
     font-size: 1rem;
   }
 
-  .green {
+  .dark {
     width: 80px;
     height: 80px;
     font-size: 1rem;
@@ -126,13 +125,13 @@
 }
 
 @media screen and (max-width: 20rem) {
-  .white {
+  .light {
     width: 30px;
     height: 30px;
     font-size: 0.5rem;
   }
 
-  .green {
+  .dark {
     width: 30px;
     height: 30px;
     font-size: 0.5rem;
