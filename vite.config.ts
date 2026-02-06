@@ -6,7 +6,8 @@ export default defineConfig({
   base: "/react-chess-vision/",
   plugins: [react()],
   test: {
-	globals: true,
-	environment: 'jsdom',
+	  globals: true,
+	  environment: 'jsdom',
+    setupFiles: './src/setupTests.ts',
   },
 });

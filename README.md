@@ -1,6 +1,6 @@
 # Chess Vision Game
 
-### Built with Vite, React, and Vanilla CSS
+### Built with Vite, React, and CSS
 
 ### The Game
 - Target square will be displayed at the center of the board
