@@ -36,7 +36,7 @@
   0 0 100px rgba(187, 187, 187, 0.5);
 }
 
-.number {
+.rank {
   position: absolute;
   text-align: left;
   margin: 0;
@@ -45,7 +45,7 @@
   left: 0;
 }
 
-.letter {
+.file {
   position: absolute;
   text-align: right;
   margin: 0 0.2rem 0 0;

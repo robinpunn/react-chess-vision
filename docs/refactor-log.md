@@ -1,8 +1,10 @@
 # Refactor Log
+## 12/25/25
+`App.tsx` is doing too much 
+- Extracted getRandom square, added tests
 
 ## 02/04/26
-`Chessboard.tsx` and `App.tsx` are doing too much.
-- Extracted getRandom square, added tests
+`Chessboard.tsx` is doing too much.
 - Extracted square information, added tests
 - Extracted color assignment, added test
 

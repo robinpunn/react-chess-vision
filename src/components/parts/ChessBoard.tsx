@@ -29,8 +29,8 @@ const ChessBoard: React.FC<ChessBoardProps> = ({ setBoard, preCountDown, id, han
               const square = squareInfo(i,j);
               const id = square.id;
               const className = squareColor(i,j);
-              const letter = square.file;
-              const number = square.rank;
+              const file = square.file;
+              const rank = square.rank;
               const isLetterCell = i === 7 && j !== 0;
               const isNumberCell = j === 0 && i !== 7;
               return isLetterCell ? (
@@ -40,7 +40,7 @@ const ChessBoard: React.FC<ChessBoardProps> = ({ setBoard, preCountDown, id, han
                   className={className}
                   onClick={handleChoice}
                 >
-                  <p className="letter">{letter}</p>
+                  <p className="file">{file}</p>
                 </td>
               ) : isNumberCell ? (
                 <td
@@ -49,7 +49,7 @@ const ChessBoard: React.FC<ChessBoardProps> = ({ setBoard, preCountDown, id, han
                   className={className}
                   onClick={handleChoice}
                 >
-                  <p className="number">{number}</p>
+                  <p className="rank">{rank}</p>
                 </td>
               ) : i === 7 && j === 0 ? (
                 <td
@@ -58,8 +58,8 @@ const ChessBoard: React.FC<ChessBoardProps> = ({ setBoard, preCountDown, id, han
                   className={className}
                   onClick={handleChoice}
                 >
-                  <p className="letter">{letter}</p>
-                  <p className="number">{number}</p>
+                  <p className="file">{file}</p>
+                  <p className="rank">{rank}</p>
                 </td>
               ) : (
                 <td

@@ -11,7 +11,7 @@
 
 ## Square Identity
 
-`squareInfo(rowIndex, colIndex, perspective)` takes perspective into consideration to return the correct square id\n
+`squareInfo(rowIndex, colIndex, perspective)` takes perspective into consideration to return the correct square id<br>
 returns:
 - `file` (`a`–`h`)
 - `rank` (`1`–`8`)
