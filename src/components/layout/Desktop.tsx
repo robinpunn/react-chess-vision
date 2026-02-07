@@ -1,4 +1,5 @@
 import React from "react";
+import { Perspective } from "../../logic/board";
 import ChessBoard from "../parts/ChessBoard";
 import CurrentSquare from "../parts/CurrentSquare";
 import History from "../parts/History";
@@ -9,6 +10,8 @@ import HighScore from "../parts/HighScore";
 import Modal from "../modal/Modal";
 
   interface DesktopProps {
+    perspective: Perspective;
+    togglePerspective: () => void;
     setBoard: (board: any) => void;
     preCountDown: string;
     id: string | null;
@@ -26,6 +29,8 @@ import Modal from "../modal/Modal";
   }
 
 const Desktop: React.FC<DesktopProps> = ({
+  perspective,
+  togglePerspective,
   setBoard,
   preCountDown,
   id,
@@ -53,6 +58,7 @@ const Desktop: React.FC<DesktopProps> = ({
       )}
       <div className="board-container">
         <ChessBoard
+          perspective={perspective}
           setBoard={setBoard}
           preCountDown={preCountDown}
           id={id}

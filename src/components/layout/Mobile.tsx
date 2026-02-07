@@ -1,4 +1,5 @@
 import React from "react";
+import { Perspective } from "../../logic/board";
 import ChessBoard from "../parts/ChessBoard";
 import CurrentSquare from "../parts/CurrentSquare";
 import History from "../parts/History";
@@ -9,6 +10,8 @@ import HighScore from "../parts/HighScore";
 import Modal from "../modal/Modal";
 
 interface MobileProps {
+  perspective: Perspective;
+  togglePerspective: () => void;
   setBoard: (board: any) => void;
   preCountDown: string;
   id: string | null;
@@ -26,6 +29,8 @@ interface MobileProps {
 }
 
 const Mobile: React.FC<MobileProps> = ({
+  perspective,
+  togglePerspective,
   setBoard,
   preCountDown,
   id,
@@ -57,6 +62,7 @@ const Mobile: React.FC<MobileProps> = ({
       </div>
       <div className="board-container">
         <ChessBoard
+          perspective={perspective}
           setBoard={setBoard}
           preCountDown={preCountDown}
           id={id}

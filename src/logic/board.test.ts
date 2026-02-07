@@ -1,5 +1,5 @@
 import {describe, it, expect} from 'vitest';
-import {squareInfo, squareColor} from '../board'
+import {squareInfo, squareColor} from './board'
 
 describe("squareInfo", () => {
   // light

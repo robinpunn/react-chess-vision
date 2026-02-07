@@ -18,3 +18,7 @@ Cleaning up `Chessboard.tsx`
 - Added showCoordinates boolean to ChessBoardProps (potential hard mode)
 - Created boolean variables to use in  <td> cell rendering
 
+## 02/07/26
+Added `usePerspective` hook
+- will allow the player to choose light or dark perspective
+- will be used by the button the player will interact with to change perspective

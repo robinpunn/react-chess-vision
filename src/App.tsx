@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Desktop from "./components/layout/Desktop";
 import Mobile from "./components/layout/Mobile";
+import { usePerspective } from "./hooks/usePerspective";
 import { getRandomSquare } from "./logic/getRandomSquare";
 
 function App() {
+  const { perspective, togglePerspective } = usePerspective();
   const [board, setBoard] = useState(null);
   const [id, setId] = useState<string | null>(null);
   const [countDown, setCountDown] = useState("0:00");
@@ -131,6 +133,8 @@ function App() {
     <div className="App">
       {width >= 960 ? (
         <Desktop
+          perspective={perspective}
+          togglePerspective={togglePerspective}
           setBoard={setBoard}
           preCountDown={preCountDown}
           id={id}
@@ -148,6 +152,8 @@ function App() {
         />
       ) : (
         <Mobile
+          perspective={perspective}
+          togglePerspective={togglePerspective}
           setBoard={setBoard}
           preCountDown={preCountDown}
           id={id}

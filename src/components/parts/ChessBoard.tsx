@@ -2,9 +2,10 @@ import React, { useRef, useEffect } from "react";
 import PreCount from "./PreCount";
 import RandomSquare from "./RandomSquare";
 import "./ChessBoard.css";
-import { squareInfo, squareColor } from "../../logic/board";
+import { squareInfo, squareColor, Perspective } from "../../logic/board";
 
 interface ChessBoardProps {
+  perspective: Perspective,
   setBoard: (board: any) => void;
   preCountDown: string;
   id: string | null;
@@ -15,6 +16,7 @@ interface ChessBoardProps {
 }
 
 const ChessBoard: React.FC<ChessBoardProps> = ({ 
+  perspective,
   setBoard, 
   preCountDown, 
   id, 
@@ -34,16 +36,21 @@ const ChessBoard: React.FC<ChessBoardProps> = ({
         {[...Array(8)].map((_, rowIndex) => (
           <tr key={rowIndex}>
             {[...Array(8)].map((_, colIndex) => {
-              const square = squareInfo(rowIndex, colIndex);
+              const square = squareInfo(rowIndex, colIndex, perspective);
               const id = square.id;
               const color = squareColor(rowIndex, colIndex);
+
+              const bottomRow = rowIndex === 7 && colIndex !== 0;
+              const leftColumn = colIndex === 0 && rowIndex !== 7;
+              const bottomLeftSquare = rowIndex === 7 && colIndex === 0;
              
               const showFile = 
-                showCoordinates && rowIndex === 7 && colIndex !== 0;
+                showCoordinates && bottomRow;
               const showRank = 
-                showCoordinates && colIndex === 0 && rowIndex !== 7;
+                showCoordinates && leftColumn;
               const showBoth = 
-                showCoordinates && rowIndex === 7 && colIndex === 0;
+                showCoordinates && bottomLeftSquare;
+
               return (
                 <td
                   key={id}
