@@ -1,4 +1,3 @@
-import React, { useRef, useEffect } from "react";
 import PreCount from "./PreCount";
 import RandomSquare from "./RandomSquare";
 import "./ChessBoard.css";
@@ -6,7 +5,6 @@ import { squareInfo, squareColor, Perspective } from "../../logic/board";
 
 interface ChessBoardProps {
   perspective: Perspective,
-  setBoard: (board: any) => void;
   preCountDown: string;
   id: string | null;
   handleChoice: React.MouseEventHandler<HTMLTableCellElement>;
@@ -17,21 +15,15 @@ interface ChessBoardProps {
 
 const ChessBoard: React.FC<ChessBoardProps> = ({ 
   perspective,
-  setBoard, 
   preCountDown, 
   id, 
   handleChoice, 
   visible, 
   showCoordinates=true 
 }) => {
-  const boardRef = useRef(null);
-
-  useEffect(() => {
-    setBoard(boardRef.current);
-  }, [setBoard]);
-
+  
   return (
-    <table className="board" ref={boardRef}>
+    <table className="board">
       <tbody>
         {[...Array(8)].map((_, rowIndex) => (
           <tr key={rowIndex}>

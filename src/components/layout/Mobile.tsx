@@ -12,7 +12,6 @@ import Modal from "../modal/Modal";
 interface MobileProps {
   perspective: Perspective;
   togglePerspective: () => void;
-  setBoard: (board: any) => void;
   preCountDown: string;
   id: string | null;
   handleChoice: React.MouseEventHandler<HTMLTableCellElement>;
@@ -31,7 +30,6 @@ interface MobileProps {
 const Mobile: React.FC<MobileProps> = ({
   perspective,
   togglePerspective,
-  setBoard,
   preCountDown,
   id,
   handleChoice,
@@ -63,7 +61,6 @@ const Mobile: React.FC<MobileProps> = ({
       <div className="board-container">
         <ChessBoard
           perspective={perspective}
-          setBoard={setBoard}
           preCountDown={preCountDown}
           id={id}
           handleChoice={handleChoice}

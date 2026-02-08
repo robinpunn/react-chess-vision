@@ -9,29 +9,27 @@ import Start from "../parts/Start";
 import HighScore from "../parts/HighScore";
 import Modal from "../modal/Modal";
 
-  interface DesktopProps {
-    perspective: Perspective;
-    togglePerspective: () => void;
-    setBoard: (board: any) => void;
-    preCountDown: string;
-    id: string | null;
-    handleChoice: React.MouseEventHandler<HTMLTableCellElement>;
-    history: string[];
-    choiceHx: string[];
-    countDown: string;
-    score: number;
-    handleStart: () => void;
-    visible: boolean;
-    countDownStart: boolean;
-    highScore: string;
-    showModal: boolean;
-    setShowModal: (showModal: boolean) => void;
-  }
+interface DesktopProps {
+  perspective: Perspective;
+  togglePerspective: () => void;
+  preCountDown: string;
+  id: string | null;
+  handleChoice: React.MouseEventHandler<HTMLTableCellElement>;
+  history: string[];
+  choiceHx: string[];
+  countDown: string;
+  score: number;
+  handleStart: () => void;
+  visible: boolean;
+  countDownStart: boolean;
+  highScore: string;
+  showModal: boolean;
+  setShowModal: (showModal: boolean) => void;
+}
 
 const Desktop: React.FC<DesktopProps> = ({
   perspective,
   togglePerspective,
-  setBoard,
   preCountDown,
   id,
   handleChoice,
@@ -59,7 +57,6 @@ const Desktop: React.FC<DesktopProps> = ({
       <div className="board-container">
         <ChessBoard
           perspective={perspective}
-          setBoard={setBoard}
           preCountDown={preCountDown}
           id={id}
           handleChoice={handleChoice}

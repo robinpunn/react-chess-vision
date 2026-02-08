@@ -21,4 +21,5 @@ Cleaning up `Chessboard.tsx`
 ## 02/07/26
 Added `usePerspective` hook
 - will allow the player to choose light or dark perspective
-- will be used by the button the player will interact with to change perspective
+- to be used by the button the player interacts with to change perspective
+Removed `[board, setBoard]` which was doing nothing...

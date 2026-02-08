@@ -7,7 +7,6 @@ import { getRandomSquare } from "./logic/getRandomSquare";
 
 function App() {
   const { perspective, togglePerspective } = usePerspective();
-  const [board, setBoard] = useState(null);
   const [id, setId] = useState<string | null>(null);
   const [countDown, setCountDown] = useState("0:00");
   const [preCountDown, setPreCountDown] = useState("");
@@ -135,7 +134,6 @@ function App() {
         <Desktop
           perspective={perspective}
           togglePerspective={togglePerspective}
-          setBoard={setBoard}
           preCountDown={preCountDown}
           id={id}
           handleChoice={handleChoice}
@@ -154,7 +152,6 @@ function App() {
         <Mobile
           perspective={perspective}
           togglePerspective={togglePerspective}
-          setBoard={setBoard}
           preCountDown={preCountDown}
           id={id}
           handleChoice={handleChoice}
