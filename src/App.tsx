@@ -4,8 +4,10 @@ import Desktop from "./components/layout/Desktop";
 import Mobile from "./components/layout/Mobile";
 import { usePerspective } from "./hooks/usePerspective";
 import { getRandomSquare } from "./logic/getRandomSquare";
+import { useWindowSize } from "./hooks/useWindowSize";
 
 function App() {
+  const width = useWindowSize();
   const { perspective, togglePerspective } = usePerspective();
   const [id, setId] = useState<string | null>(null);
   const [countDown, setCountDown] = useState("0:00");
@@ -16,15 +18,7 @@ function App() {
   const [score, setScore] = useState(0);
   const [visible, setVisible] = useState(false);
   const [highScore, setHighScore] = useState("");
-  const [showModal, setShowModal] = useState(false);
-  const [width, setWidth] = useState(window.innerWidth);
-
-  /*check window size*/
-  useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const [showModal, setShowModal] = useState(false); 
 
   /*countdown timer*/
   useEffect(() => {
