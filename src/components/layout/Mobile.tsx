@@ -8,6 +8,7 @@ import Score from "../parts/Score";
 import Start from "../parts/Start";
 import HighScore from "../parts/HighScore";
 import Modal from "../modal/Modal";
+import { HighScoreData } from "../../hooks/useGameScore";
 
 interface MobileProps {
   perspective: Perspective;
@@ -22,7 +23,7 @@ interface MobileProps {
   handleStart: () => void;
   visible: boolean;
   countDownStart: boolean;
-  highScore: string;
+  highScore: HighScoreData | null;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
 }

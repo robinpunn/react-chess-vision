@@ -5,19 +5,17 @@ import Mobile from "./components/layout/Mobile";
 import { usePerspective } from "./hooks/usePerspective";
 import { getRandomSquare } from "./logic/getRandomSquare";
 import { useWindowSize } from "./hooks/useWindowSize";
+import { useGameScore } from "./hooks/useGameScore";
 
 function App() {
   const width = useWindowSize();
   const { perspective, togglePerspective } = usePerspective();
+  const scoring = useGameScore();
   const [id, setId] = useState<string | null>(null);
   const [countDown, setCountDown] = useState("0:00");
   const [preCountDown, setPreCountDown] = useState("");
   const [countDownStart, setCountDownStart] = useState(false);
-  const [history, setHistory] = useState<any[]>([]);
-  const [choiceHx, setChoiceHx] = useState<any[]>([]);
-  const [score, setScore] = useState(0);
   const [visible, setVisible] = useState(false);
-  const [highScore, setHighScore] = useState("");
   const [showModal, setShowModal] = useState(false); 
 
   /*countdown timer*/
@@ -47,15 +45,7 @@ function App() {
     if (countDownStart && parseInt(preCountDown, 10) === 0) {
       setId(getRandomSquare());
     }
-  }, [countDownStart, preCountDown]);
-
-  /*high score*/
-  useEffect(() => {
-    const storedHighScore = localStorage.getItem("highScore");
-    if (storedHighScore) {
-      setHighScore(storedHighScore);
-    }
-  }, []);
+  }, [countDownStart, preCountDown]); 
 
   /*random square fade out*/
   useEffect(() => {
@@ -78,12 +68,10 @@ function App() {
   /*start timer function*/
   const handleStart = () => {
     setShowModal(false);
-    setScore(0);
+    scoring.reset();
     setCountDownStart(true);
     setPreCountDown("3");
-    setCountDown("30");
-    setHistory([]);
-    setChoiceHx([]);
+    setCountDown("30"); 
     setId(null);
   };
 
@@ -91,34 +79,15 @@ function App() {
   const handleChoice = (e: React.MouseEvent<HTMLTableCellElement>) => {
     let choice = e.currentTarget.id;
     if (countDownStart && parseInt(preCountDown, 10) === 0) {
-      if (choice === id) {
-        setChoiceHx([...choiceHx, choice]);
-        setHistory([...history, id]);
-        setScore(score + 1);
-        saveHighScore(score + 1, history.length + 1);
+      const isCorrect = scoring.recordChoice(choice, id);
+      
+      if (isCorrect) {
+        scoring.incrementScore();
+        scoring.saveHighScore(scoring.score + 1, scoring.history.length + 1);
         setId(getRandomSquare());
       } else {
-        setChoiceHx([...choiceHx, choice]);
-        setHistory([...history, id]);
         setId(getRandomSquare());
       }
-    }
-  };
-
-  /*save high score*/
-  const saveHighScore = (score: number, total:number) => {
-    const highScoreString = localStorage.getItem("highScore");
-    if (highScoreString) {
-      const [prevScore, prevTotal] = highScoreString.split("/");
-      if (score > parseInt(prevScore, 10) || (score === parseInt(prevScore, 10) && total < parseInt(prevScore, 10))) {
-        const newHighScore = `${score}/${total}`;
-        setHighScore(newHighScore);
-        localStorage.setItem("highScore", newHighScore);
-      }
-    } else {
-      const newHighScore = `${score}/${total}`;
-      setHighScore(newHighScore);
-      localStorage.setItem("highScore", newHighScore);
     }
   };
 
@@ -131,14 +100,14 @@ function App() {
           preCountDown={preCountDown}
           id={id}
           handleChoice={handleChoice}
-          history={history}
-          choiceHx={choiceHx}
+          history={scoring.history}
+          choiceHx={scoring.choiceHx}
           countDown={countDown}
-          score={score}
+          score={scoring.score}
           handleStart={handleStart}
           countDownStart={countDownStart}
           visible={visible}
-          highScore={highScore}
+          highScore={scoring.highScore}
           showModal={showModal}
           setShowModal={setShowModal}
         />
@@ -149,14 +118,14 @@ function App() {
           preCountDown={preCountDown}
           id={id}
           handleChoice={handleChoice}
-          history={history}
-          choiceHx={choiceHx}
+          history={scoring.history}
+          choiceHx={scoring.choiceHx}
           countDown={countDown}
-          score={score}
+          score={scoring.score}
           handleStart={handleStart}
           countDownStart={countDownStart}
           visible={visible}
-          highScore={highScore}
+          highScore={scoring.highScore}
           showModal={showModal}
           setShowModal={setShowModal}
         />

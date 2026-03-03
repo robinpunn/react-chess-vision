@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-type HighScoreData = {
+export type HighScoreData = {
   score: number,
   total: number
 };
@@ -20,7 +20,7 @@ type GameScoreActions = {
   reset: () => void;
 };
 
-type UseGameScoreReturn = GameScoreState & GameScoreActions;
+export type UseGameScoreReturn = GameScoreState & GameScoreActions;
 
 export const useGameScore = (): UseGameScoreReturn => {
   const [score, setScore] = useState(0);
