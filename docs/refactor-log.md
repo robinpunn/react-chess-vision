@@ -1,4 +1,10 @@
 # Refactor Log
+## 03/03/26
+Added `useGameScore` hook
+- remove logic from App.tsx
+- added tests
+- leaves basic game scoring unchanged and allows for easy scoring manipulation in potential new modes
+
 ## 03/02/26
 Added `useWindowSize` hook
 - replaced the logic that initally existed in App.tsx into its own file
