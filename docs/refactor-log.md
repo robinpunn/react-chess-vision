@@ -1,4 +1,9 @@
 # Refactor Log
+## 03/06/26
+Create `useSquareVisual` hook
+- handles the visibility/fade out of current square
+- added tests
+
 ## 03/05/26
 Added tests for `useTimer` hook
 - added `formatTime` utils for ui

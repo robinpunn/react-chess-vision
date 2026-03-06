@@ -7,13 +7,14 @@ import { getRandomSquare } from "./logic/getRandomSquare";
 import { useWindowSize } from "./hooks/useWindowSize";
 import { useGameScore } from "./hooks/useGameScore";
 import { useTimer } from "./hooks/useTimer";
+import { useSquareVisual } from "./hooks/useSquareVisual";
 
 function App() {
   const width = useWindowSize();
   const { perspective, togglePerspective } = usePerspective();
   const scoring = useGameScore();
   const [id, setId] = useState<string | null>(null); 
-  const [visible, setVisible] = useState(false);
+  const square = useSquareVisual(id);
   const [showModal, setShowModal] = useState(false); 
 
   const gameTimer = useTimer({
@@ -34,17 +35,6 @@ function App() {
       setId(getRandomSquare());
     }
   }); 
-
-  /*random square fade out*/
-  useEffect(() => {
-    if (id !== null) {
-      setVisible(true);
-      const timerId = setTimeout(() => {
-        setVisible(false);
-      }, 1000);
-      return () => clearTimeout(timerId);
-    }
-  }, [id]); 
 
   /*start timer function*/
   const handleStart = () => {
@@ -95,7 +85,7 @@ function App() {
           score={scoring.score}
           handleStart={handleStart}
           countDownStart={gameTimer.isRunning}
-          visible={visible}
+          visible={square.visible}
           highScore={scoring.highScore}
           showModal={showModal}
           setShowModal={setShowModal}
@@ -114,7 +104,7 @@ function App() {
           score={scoring.score}
           handleStart={handleStart}
           countDownStart={gameTimer.isRunning}
-          visible={visible}
+          visible={square.visible}
           highScore={scoring.highScore}
           showModal={showModal}
           setShowModal={setShowModal}
