@@ -1,4 +1,15 @@
 # Refactor Log
+## 03/05/26
+Added tests for `useTimer` hook
+- added `formatTime` utils for ui
+- implemented `useTimer` hook in App.tsx
+- will be moved when game mode hook is created
+
+## 03/04/26
+Added `useTimer` hook
+- removed logic from App.tsx
+- timer can be used as countdown, ongoing, precountdown, or time for selectoin
+
 ## 03/03/26
 Added `useGameScore` hook
 - removed logic from App.tsx

@@ -27,6 +27,30 @@ describe("test useTimer", () => {
 
       expect(result.current.time).toBe(9500);
     });
+    
+    it("countdown is running should toggle", () => {
+      const { result } = renderHook(() => 
+        useTimer({mode: "countdown", duration: 10000, intervalMs: 100})
+      );
+
+      expect(result.current.isRunning).toBe(false);
+
+      act(() => {
+        result.current.start();
+      });
+
+      act(() => {
+        vi.advanceTimersByTime(500);
+      });
+
+      expect(result.current.isRunning).toBe(true);
+      
+      act(() => {
+        vi.advanceTimersByTime(10000);
+      });
+
+      expect(result.current.isRunning).toBe(false);
+    });
   });
 
   describe("countup timer", () => { 

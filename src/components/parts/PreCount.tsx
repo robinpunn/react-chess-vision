@@ -1,8 +1,10 @@
-function PreCount({ time }: {time:string}) {
+import { formatPreCountdown } from "../../utils/formatTime";
+
+function PreCount({ time }: { time: number }) {
   return (
     <tbody className="precount" style={{ color: "white", fontSize: "3rem" }}>
       <tr>
-        <td>{time}</td>
+        <td>{formatPreCountdown(Math.ceil(time/1000))}</td>
       </tr>
     </tbody>
   );

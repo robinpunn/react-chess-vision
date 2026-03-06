@@ -5,7 +5,8 @@ import { squareInfo, squareColor, Perspective } from "../../logic/board";
 
 interface ChessBoardProps {
   perspective: Perspective,
-  preCountDown: string;
+  preCountDown: number;
+  preCountDownRunning: boolean;
   id: string | null;
   handleChoice: React.MouseEventHandler<HTMLTableCellElement>;
   visible: boolean;
@@ -16,6 +17,7 @@ interface ChessBoardProps {
 const ChessBoard: React.FC<ChessBoardProps> = ({ 
   perspective,
   preCountDown, 
+  preCountDownRunning,
   id, 
   handleChoice, 
   visible, 
@@ -61,8 +63,8 @@ const ChessBoard: React.FC<ChessBoardProps> = ({
             })}
           </tr>
         ))}
-      </tbody>
-      {parseInt(preCountDown) > 0 && <PreCount time={preCountDown} />}
+      </tbody> 
+      {preCountDownRunning && <PreCount time={preCountDown} />}
       <RandomSquare id={id} visible={visible} />
     </table>
   );

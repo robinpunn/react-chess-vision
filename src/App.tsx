@@ -6,46 +6,34 @@ import { usePerspective } from "./hooks/usePerspective";
 import { getRandomSquare } from "./logic/getRandomSquare";
 import { useWindowSize } from "./hooks/useWindowSize";
 import { useGameScore } from "./hooks/useGameScore";
+import { useTimer } from "./hooks/useTimer";
 
 function App() {
   const width = useWindowSize();
   const { perspective, togglePerspective } = usePerspective();
   const scoring = useGameScore();
-  const [id, setId] = useState<string | null>(null);
-  const [countDown, setCountDown] = useState("0:00");
-  const [preCountDown, setPreCountDown] = useState("");
-  const [countDownStart, setCountDownStart] = useState(false);
+  const [id, setId] = useState<string | null>(null); 
   const [visible, setVisible] = useState(false);
   const [showModal, setShowModal] = useState(false); 
 
-  /*countdown timer*/
-  useEffect(() => {
-    let interval: number | undefined;
-
-    if (countDownStart) {
-      if (parseInt(preCountDown, 10) > 0) {
-        interval = setInterval(() => {
-          setPreCountDown((preCountDown) => (parseInt(preCountDown, 10) - 1).toString());
-        }, 1000);
-      } else if (parseInt(countDown, 10) > 0) {
-        interval = setInterval(() => {
-          setCountDown((countDown) => (parseInt(countDown, 10) - 1).toString());
-        }, 1000);
-      } else {
-        setCountDownStart(false);
-        setCountDown("0:00");
-      }
-    } else {
-      clearInterval(interval);
+  const gameTimer = useTimer({
+    mode: "countdown",
+    duration: 30000,
+    intervalMs: 10,
+    onComplete: () => {
+      setShowModal(true);
     }
-    return () => clearInterval(interval);
-  }, [countDownStart, countDown, preCountDown]);
-
-  useEffect(() => {
-    if (countDownStart && parseInt(preCountDown, 10) === 0) {
+  });
+ 
+  const preCountDownTimer = useTimer({
+    mode: "countdown",
+    duration: 3000,
+    intervalMs: 1000,
+    onComplete: () => {
+      gameTimer.start();
       setId(getRandomSquare());
     }
-  }, [countDownStart, preCountDown]); 
+  }); 
 
   /*random square fade out*/
   useEffect(() => {
@@ -56,29 +44,22 @@ function App() {
       }, 1000);
       return () => clearTimeout(timerId);
     }
-  }, [id]);
-
-  /*show modal at end of game*/
-  useEffect(() => {
-    if (countDownStart && parseInt(countDown, 10) === 0) {
-      setShowModal(true); // set showModal to true when countdown reaches zero
-    }
-  }, [countDown, countDownStart]);
+  }, [id]); 
 
   /*start timer function*/
   const handleStart = () => {
     setShowModal(false);
-    scoring.reset();
-    setCountDownStart(true);
-    setPreCountDown("3");
-    setCountDown("30"); 
+    scoring.reset(); 
     setId(null);
+
+    preCountDownTimer.start();
   };
 
   /*select square*/
   const handleChoice = (e: React.MouseEvent<HTMLTableCellElement>) => {
     let choice = e.currentTarget.id;
-    if (countDownStart && parseInt(preCountDown, 10) === 0) {
+
+    if (gameTimer.isRunning && preCountDownTimer.time === 0) {
       const isCorrect = scoring.recordChoice(choice, id);
       
       if (isCorrect) {
@@ -90,22 +71,23 @@ function App() {
       }
     }
   };
-
+  
   return (
     <div className="App">
       {width >= 960 ? (
         <Desktop
           perspective={perspective}
           togglePerspective={togglePerspective}
-          preCountDown={preCountDown}
+          preCountDown={preCountDownTimer.time}
+          preCountDownRunning={preCountDownTimer.isRunning}
           id={id}
           handleChoice={handleChoice}
           history={scoring.history}
           choiceHx={scoring.choiceHx}
-          countDown={countDown}
+          countDown={gameTimer.time}
           score={scoring.score}
           handleStart={handleStart}
-          countDownStart={countDownStart}
+          countDownStart={gameTimer.isRunning}
           visible={visible}
           highScore={scoring.highScore}
           showModal={showModal}
@@ -115,15 +97,16 @@ function App() {
         <Mobile
           perspective={perspective}
           togglePerspective={togglePerspective}
-          preCountDown={preCountDown}
+          preCountDown={preCountDownTimer.time}
+          preCountDownRunning={preCountDownTimer.isRunning}
           id={id}
           handleChoice={handleChoice}
           history={scoring.history}
           choiceHx={scoring.choiceHx}
-          countDown={countDown}
+          countDown={gameTimer.time}
           score={scoring.score}
           handleStart={handleStart}
-          countDownStart={countDownStart}
+          countDownStart={gameTimer.isRunning}
           visible={visible}
           highScore={scoring.highScore}
           showModal={showModal}

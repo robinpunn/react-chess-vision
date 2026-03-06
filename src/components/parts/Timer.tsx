@@ -1,11 +1,12 @@
 import { BsHourglassBottom } from "react-icons/bs";
+import { formatCountdown } from "../../utils/formatTime";
 
-function Timer({ time }: {time:string}) {
+function Timer({ time }: { time: number }) {
   return (
     <p className="time">
       <BsHourglassBottom size="1.1rem" color="white" className="time-icon" />
       {""}
-      {time}
+      {formatCountdown(time)}
     </p>
   );
 }

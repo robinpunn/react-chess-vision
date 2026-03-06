@@ -13,12 +13,13 @@ import { HighScoreData } from "../../hooks/useGameScore";
 interface DesktopProps {
   perspective: Perspective;
   togglePerspective: () => void;
-  preCountDown: string;
+  preCountDown: number;
+  preCountDownRunning: boolean;
   id: string | null;
   handleChoice: React.MouseEventHandler<HTMLTableCellElement>;
   history: string[];
   choiceHx: string[];
-  countDown: string;
+  countDown: number;
   score: number;
   handleStart: () => void;
   visible: boolean;
@@ -32,6 +33,7 @@ const Desktop: React.FC<DesktopProps> = ({
   perspective,
   togglePerspective,
   preCountDown,
+  preCountDownRunning,
   id,
   handleChoice,
   history,
@@ -59,6 +61,7 @@ const Desktop: React.FC<DesktopProps> = ({
         <ChessBoard
           perspective={perspective}
           preCountDown={preCountDown}
+          preCountDownRunning={preCountDownRunning}
           id={id}
           handleChoice={handleChoice}
           visible={visible}
