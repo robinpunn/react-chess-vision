@@ -8,7 +8,7 @@ describe("test useTimer", () => {
   });
 
   afterEach(() => {
-    vi.resetAllMocks();
+    vi.useRealTimers();
   });
 
   describe("countdown timer", () => {
@@ -60,6 +60,21 @@ describe("test useTimer", () => {
       );
 
       act(() => {
+        result.current.start();
+      });
+
+      act(() => {
+        vi.advanceTimersByTime(300);
+      });
+
+      expect(result.current.time).toBe(300);
+    });
+
+    it("does not create multiple intervals if start is called twice", () => {
+      const { result } = renderHook(() => useTimer ({mode: "countup", intervalMs: 100}));
+      
+      act(() => {
+        result.current.start();
         result.current.start();
       });
 

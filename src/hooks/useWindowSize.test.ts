@@ -11,7 +11,6 @@ describe("useWindowSize", () => {
     });
 
     const { result } = renderHook(() => useWindowSize());
-    console.log(result)
 
     expect(result.current).toBe(1024);
   });

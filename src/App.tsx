@@ -48,9 +48,16 @@ function App() {
 
   /*start timer function*/
   const handleStart = () => {
+    if (preCountDownTimer.isRunning || gameTimer.isRunning) {
+      return;
+    }
+
     setShowModal(false);
     scoring.reset(); 
     setId(null);
+    
+    gameTimer.reset();
+    preCountDownTimer.reset()
 
     preCountDownTimer.start();
   };
