@@ -1,4 +1,10 @@
 # Refactor Log
+## 03/07/26
+Added `useClassicMode` hook
+- game mode hook for original version of the game
+- added tests
+- replaced logic in `App.tsx`
+
 ## 03/06/26
 Create `useSquareVisual` hook
 - handles the visibility/fade out of current square
@@ -7,7 +13,7 @@ Create `useSquareVisual` hook
 ## 03/05/26
 Added tests for `useTimer` hook
 - added `formatTime` utils for ui
-- implemented `useTimer` hook in App.tsx
+- implemented `useTimer` hook in `App.tsx`
 - will be moved when game mode hook is created
 
 ## 03/04/26
@@ -17,13 +23,13 @@ Added `useTimer` hook
 
 ## 03/03/26
 Added `useGameScore` hook
-- removed logic from App.tsx
+- removed logic from `App.tsx`
 - added tests
 - leaves basic game scoring unchanged and allows for easy scoring manipulation in potential new modes
 
 ## 03/02/26
 Added `useWindowSize` hook
-- replaced the logic that initally existed in App.tsx into its own file
+- replaced the logic that initally existed in `App.tsx` into its own file
 - added tests
 
 ## 02/07/26

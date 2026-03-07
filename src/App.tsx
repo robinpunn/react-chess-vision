@@ -1,113 +1,28 @@
-import { useState, useEffect } from "react";
 import "./App.css";
 import Desktop from "./components/layout/Desktop";
 import Mobile from "./components/layout/Mobile";
-import { usePerspective } from "./hooks/usePerspective";
-import { getRandomSquare } from "./logic/getRandomSquare";
-import { useWindowSize } from "./hooks/useWindowSize";
-import { useGameScore } from "./hooks/useGameScore";
-import { useTimer } from "./hooks/useTimer";
-import { useSquareVisual } from "./hooks/useSquareVisual";
+import { useWindowSize } from "./hooks/core/useWindowSize";
+import { usePerspective } from "./hooks/core/usePerspective";
+import { useClassicMode } from "./hooks/modes/useClassicMode";
 
 function App() {
   const width = useWindowSize();
   const { perspective, togglePerspective } = usePerspective();
-  const scoring = useGameScore();
-  const [id, setId] = useState<string | null>(null); 
-  const square = useSquareVisual(id);
-  const [showModal, setShowModal] = useState(false); 
-
-  const gameTimer = useTimer({
-    mode: "countdown",
-    duration: 30000,
-    intervalMs: 10,
-    onComplete: () => {
-      setShowModal(true);
-    }
-  });
- 
-  const preCountDownTimer = useTimer({
-    mode: "countdown",
-    duration: 3000,
-    intervalMs: 1000,
-    onComplete: () => {
-      gameTimer.start();
-      setId(getRandomSquare());
-    }
-  }); 
-
-  /*start timer function*/
-  const handleStart = () => {
-    if (preCountDownTimer.isRunning || gameTimer.isRunning) {
-      return;
-    }
-
-    setShowModal(false);
-    scoring.reset(); 
-    setId(null);
+  const game = useClassicMode();
     
-    gameTimer.reset();
-    preCountDownTimer.reset()
-
-    preCountDownTimer.start();
-  };
-
-  /*select square*/
-  const handleChoice = (e: React.MouseEvent<HTMLTableCellElement>) => {
-    let choice = e.currentTarget.id;
-
-    if (gameTimer.isRunning && preCountDownTimer.time === 0) {
-      const isCorrect = scoring.recordChoice(choice, id);
-      
-      if (isCorrect) {
-        scoring.incrementScore();
-        scoring.saveHighScore(scoring.score + 1, scoring.history.length + 1);
-        setId(getRandomSquare());
-      } else {
-        setId(getRandomSquare());
-      }
-    }
-  };
-  
   return (
     <div className="App">
       {width >= 960 ? (
         <Desktop
+          {... game}
           perspective={perspective}
-          togglePerspective={togglePerspective}
-          preCountDown={preCountDownTimer.time}
-          preCountDownRunning={preCountDownTimer.isRunning}
-          id={id}
-          handleChoice={handleChoice}
-          history={scoring.history}
-          choiceHx={scoring.choiceHx}
-          countDown={gameTimer.time}
-          score={scoring.score}
-          handleStart={handleStart}
-          countDownStart={gameTimer.isRunning}
-          visible={square.visible}
-          highScore={scoring.highScore}
-          showModal={showModal}
-          setShowModal={setShowModal}
+          togglePerspective={togglePerspective} 
         />
       ) : (
         <Mobile
+          {... game}
           perspective={perspective}
-          togglePerspective={togglePerspective}
-          preCountDown={preCountDownTimer.time}
-          preCountDownRunning={preCountDownTimer.isRunning}
-          id={id}
-          handleChoice={handleChoice}
-          history={scoring.history}
-          choiceHx={scoring.choiceHx}
-          countDown={gameTimer.time}
-          score={scoring.score}
-          handleStart={handleStart}
-          countDownStart={gameTimer.isRunning}
-          visible={square.visible}
-          highScore={scoring.highScore}
-          showModal={showModal}
-          setShowModal={setShowModal}
+          togglePerspective={togglePerspective} 
         />
       )}
     </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Perspective } from "../logic/board";
+import type { Perspective } from "../../logic/board";
 
 type UsePerspectiveReturn = {
   perspective: Perspective;

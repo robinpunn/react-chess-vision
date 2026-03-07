@@ -8,25 +8,30 @@ import Score from "../parts/Score";
 import Start from "../parts/Start";
 import HighScore from "../parts/HighScore";
 import Modal from "../modal/Modal";
-import { HighScoreData } from "../../hooks/useGameScore";
+import { HighScoreData } from "../../hooks/core/useGameScore";
 
 interface MobileProps {
   perspective: Perspective;
   togglePerspective: () => void;
+  
   preCountDown: number;
   preCountDownRunning: boolean;
+  countDown: number;
+  countDownRunning: boolean;
+
   id: string | null;
-  handleChoice: React.MouseEventHandler<HTMLTableCellElement>;
+  visible: boolean;
+
+  score: number;
+  highScore: HighScoreData | null;
   history: string[];
   choiceHx: string[];
-  countDown: number;
-  score: number;
-  handleStart: () => void;
-  visible: boolean;
-  countDownStart: boolean;
-  highScore: HighScoreData | null;
+
   showModal: boolean;
-  setShowModal: (showModal: boolean) => void;
+  setShowModal: (show: boolean) => void;
+
+  handleStart: () => void;
+  handleChoice: (e: React.MouseEvent<HTMLTableCellElement>) => void; 
 }
 
 const Mobile: React.FC<MobileProps> = ({
@@ -41,7 +46,7 @@ const Mobile: React.FC<MobileProps> = ({
   countDown,
   score,
   handleStart,
-  countDownStart,
+  countDownRunning,
   visible,
   highScore,
   showModal,
@@ -78,7 +83,7 @@ const Mobile: React.FC<MobileProps> = ({
         </div>
         <div className="start-container">
           <Timer time={countDown} />
-          <Start handleStart={handleStart} disabled={countDownStart} />
+          <Start handleStart={handleStart} disabled={countDownRunning} />
         </div>
       </div>
     </div>

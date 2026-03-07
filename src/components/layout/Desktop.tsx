@@ -8,25 +8,30 @@ import Score from "../parts/Score";
 import Start from "../parts/Start";
 import HighScore from "../parts/HighScore";
 import Modal from "../modal/Modal";
-import { HighScoreData } from "../../hooks/useGameScore";
+import { HighScoreData } from "../../hooks/core/useGameScore";
 
 interface DesktopProps {
   perspective: Perspective;
   togglePerspective: () => void;
+  
   preCountDown: number;
   preCountDownRunning: boolean;
+  countDown: number;
+  countDownRunning: boolean;
+  
   id: string | null;
-  handleChoice: React.MouseEventHandler<HTMLTableCellElement>;
+  visible: boolean;
+  
+  score: number;
+  highScore: HighScoreData | null;
   history: string[];
   choiceHx: string[];
-  countDown: number;
-  score: number;
-  handleStart: () => void;
-  visible: boolean;
-  countDownStart: boolean;
-  highScore: HighScoreData | null;
+  
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
+  
+  handleStart: () => void;
+  handleChoice: React.MouseEventHandler<HTMLTableCellElement>;
 }
 
 const Desktop: React.FC<DesktopProps> = ({
@@ -42,7 +47,7 @@ const Desktop: React.FC<DesktopProps> = ({
   score,
   handleStart,
   visible,
-  countDownStart,
+  countDownRunning,
   highScore,
   showModal,
   setShowModal,
@@ -75,7 +80,7 @@ const Desktop: React.FC<DesktopProps> = ({
           <HighScore highScore={highScore} />
         </div>
         <History history={history} choice={choiceHx} />
-        <Start handleStart={handleStart} disabled={countDownStart} />
+        <Start handleStart={handleStart} disabled={countDownRunning} />
       </div>
     </div>
   );
