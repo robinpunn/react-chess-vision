@@ -1,7 +1,7 @@
 import React from "react";
 import Start from "../parts/Start";
 import "./Modal.css";
-import { HighScoreData } from "../../hooks/useGameScore";
+import { HighScoreData } from "../../hooks/core/useGameScore";
 
 interface ModalProps {
   score: number;

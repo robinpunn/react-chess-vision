@@ -1,6 +1,6 @@
 import React from "react";
 import { BsTrophyFill } from "react-icons/bs";
-import { HighScoreData } from "../../hooks/useGameScore";
+import { HighScoreData } from "../../hooks/core/useGameScore";
 
 interface HighScore {
   highScore: HighScoreData | null;
